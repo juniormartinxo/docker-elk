@@ -4,6 +4,7 @@ services:
       context: extensions/heartbeat/
       args:
         ELASTIC_VERSION: ${ELASTIC_VERSION}
+    container_name: ${CONTAINER_EXTENSION_HEARTBEAT_NAME}
     command:
       # Log to stderr.
       - -e
@@ -17,6 +18,6 @@ services:
       HEARTBEAT_INTERNAL_PASSWORD: ${HEARTBEAT_INTERNAL_PASSWORD:-}
       BEATS_SYSTEM_PASSWORD: ${BEATS_SYSTEM_PASSWORD:-}
     networks:
-      - elk
+      - ${NETWORK_NAME}
     depends_on:
       - elasticsearch

@@ -16,11 +16,12 @@ secret_management.encryption_keys:
 ent_search.listen_host: 0.0.0.0
 
 # URL at which users reach Enterprise Search / Kibana
-ent_search.external_url: http://localhost:3002
-kibana.host: http://localhost:5601
+ent_search.external_url: 'http://localhost:${EXTENSION_ENTERPRISE_SEARCH_PORT}'
+
+kibana.host: 'http://localhost:${EXTENSION_KIBANA_PORT}'
 
 # Elasticsearch URL and credentials
-elasticsearch.host: http://elasticsearch:9200
+elasticsearch.host: 'http://elasticsearch:${ELASTIC_PORT}'
 elasticsearch.username: elastic
 elasticsearch.password: ${ELASTIC_PASSWORD}
 

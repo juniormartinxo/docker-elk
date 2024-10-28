@@ -4,6 +4,7 @@ services:
       context: extensions/enterprise-search/
       args:
         ELASTIC_VERSION: ${ELASTIC_VERSION}
+    container_name: ${CONTAINER_EXTENSION_ENTERPRISE_SEARCH_NAME}
     volumes:
       - ./extensions/enterprise-search/config/enterprise-search.yml:/usr/share/enterprise-search/config/enterprise-search.yml:ro,Z
     environment:
@@ -11,8 +12,8 @@ services:
       ENT_SEARCH_DEFAULT_PASSWORD: 'changeme'
       ELASTIC_PASSWORD: ${ELASTIC_PASSWORD:-}
     ports:
-      - 3002:3002
+      - ${EXTENSION_ENTERPRISE_SEARCH_PORT}:${EXTENSION_ENTERPRISE_SEARCH_PORT}
     networks:
-      - elk
+      - ${NETWORK_NAME}
     depends_on:
       - elasticsearch

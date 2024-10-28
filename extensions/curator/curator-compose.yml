@@ -2,6 +2,7 @@ services:
   curator:
     build:
       context: extensions/curator/
+    container_name: ${CONTAINER_EXTENSION_CURATOR_NAME}
     init: true
     volumes:
       - ./extensions/curator/config/curator.yml:/.curator/curator.yml:ro,Z
@@ -9,6 +10,6 @@ services:
     environment:
       ELASTIC_PASSWORD: ${ELASTIC_PASSWORD:-}
     networks:
-      - elk
+      - ${NETWORK_NAME}
     depends_on:
       - elasticsearch

@@ -4,6 +4,7 @@ services:
       context: extensions/fleet/
       args:
         ELASTIC_VERSION: ${ELASTIC_VERSION}
+    container_name: ${CONTAINER_EXTENSION_FLEET_NAME}
     # Run as 'root' instead of 'elastic-agent' (uid 1000) to allow reading
     # 'docker.sock' and the host's filesystem.
     user: root
@@ -31,12 +32,12 @@ services:
       # (b) Enroll using a pre-generated service token
       #FLEET_SERVER_SERVICE_TOKEN: <service_token>
     ports:
-      - 8220:8220
+      - ${EXTENSION_FLEET_PORT}:${EXTENSION_FLEET_PORT}
     hostname: fleet-server
     # Elastic Agent does not retry failed connections to Kibana upon the initial enrollment phase.
     restart: on-failure
     networks:
-      - elk
+      - ${NETWORK_NAME}
     depends_on:
       - elasticsearch
       - kibana
